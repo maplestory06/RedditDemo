@@ -13,6 +13,9 @@ class TopListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
+        Downloader.shared.feedFetch { (feeds, message) in
+            
+        }
     }
 
     private func setupTable() {

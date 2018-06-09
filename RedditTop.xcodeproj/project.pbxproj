@@ -13,6 +13,9 @@
 		50971B6720CC866800E82184 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50971B6620CC866800E82184 /* Assets.xcassets */; };
 		50971B6A20CC866800E82184 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50971B6820CC866800E82184 /* LaunchScreen.storyboard */; };
 		50971B7220CC879E00E82184 /* TopListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7120CC879E00E82184 /* TopListTableViewCell.swift */; };
+		50971B7420CC8AEC00E82184 /* RedditFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7320CC8AEC00E82184 /* RedditFeed.swift */; };
+		50971B7620CC8B7D00E82184 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7520CC8B7D00E82184 /* Downloader.swift */; };
+		50971B7820CC8C1200E82184 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7720CC8C1200E82184 /* Key.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		50971B6920CC866800E82184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50971B6B20CC866800E82184 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50971B7120CC879E00E82184 /* TopListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopListTableViewCell.swift; sourceTree = "<group>"; };
+		50971B7320CC8AEC00E82184 /* RedditFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditFeed.swift; sourceTree = "<group>"; };
+		50971B7520CC8B7D00E82184 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		50971B7720CC8C1200E82184 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,9 @@
 				50971B5F20CC866800E82184 /* AppDelegate.swift */,
 				50971B6120CC866800E82184 /* TopListViewController.swift */,
 				50971B7120CC879E00E82184 /* TopListTableViewCell.swift */,
+				50971B7320CC8AEC00E82184 /* RedditFeed.swift */,
+				50971B7520CC8B7D00E82184 /* Downloader.swift */,
+				50971B7720CC8C1200E82184 /* Key.swift */,
 				50971B6320CC866800E82184 /* Main.storyboard */,
 				50971B6620CC866800E82184 /* Assets.xcassets */,
 				50971B6820CC866800E82184 /* LaunchScreen.storyboard */,
@@ -138,9 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50971B7620CC8B7D00E82184 /* Downloader.swift in Sources */,
 				50971B6220CC866800E82184 /* TopListViewController.swift in Sources */,
 				50971B7220CC879E00E82184 /* TopListTableViewCell.swift in Sources */,
 				50971B6020CC866800E82184 /* AppDelegate.swift in Sources */,
+				50971B7420CC8AEC00E82184 /* RedditFeed.swift in Sources */,
+				50971B7820CC8C1200E82184 /* Key.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
