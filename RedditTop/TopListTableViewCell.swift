@@ -30,7 +30,7 @@ class TopListTableViewCell: UITableViewCell {
         imgThumbnail.contentMode = .scaleAspectFill
         imgThumbnail.layer.cornerRadius = 5
         imgThumbnail.clipsToBounds = true
-        imgThumbnail.backgroundColor = .lightGray
+        imgThumbnail.backgroundColor = .white
     }
 
     public func configureCell(feed: RedditFeed) {

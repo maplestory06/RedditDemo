@@ -30,11 +30,13 @@ class TopListViewController: UITableViewController {
                 return
             }
             DispatchQueue.main.async {
-                self.redditFeeds = data
+                self.redditFeeds += data
                 self.tableView.reloadData()
             }
         }
     }
+    
+    // MARK: - TableView Delegate & Datasource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -48,6 +50,12 @@ class TopListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell", for: indexPath) as! TopListTableViewCell
         cell.configureCell(feed: redditFeeds[indexPath.row])
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == redditFeeds.count - 1 {
+            fetchData()
+        }
     }
     
 }
