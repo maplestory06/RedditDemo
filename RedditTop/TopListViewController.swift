@@ -10,17 +10,30 @@ import UIKit
 
 class TopListViewController: UITableViewController {
 
+    private var redditFeeds = [RedditFeed]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
-        Downloader.shared.feedFetch { (feeds, message) in
-            
-        }
+        fetchData()
     }
 
     private func setupTable() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        tableView.tableFooterView = UIView(frame: .zero)
+    }
+    
+    private func fetchData() {
+        Downloader.shared.feedFetch { (feeds, message) in
+            guard let data = feeds else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.redditFeeds = data
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -28,12 +41,12 @@ class TopListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return redditFeeds.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell", for: indexPath) as! TopListTableViewCell
-        cell.configureCell(title: "This is a title")
+        cell.configureCell(feed: redditFeeds[indexPath.row])
         return cell
     }
     

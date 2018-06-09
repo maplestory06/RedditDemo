@@ -6,7 +6,9 @@
 //  Copyright © 2018 Yue Shen. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+let imageCache = NSCache<AnyObject, AnyObject>()
 
 class Downloader {
     
@@ -52,13 +54,11 @@ class Downloader {
                         completion(nil, "No children")
                         return
                     }
-                    print("count:", children.count)
                     for child in children {
                         guard let child_data = child["data"] as? [String: Any] else {
                             continue
                         }
                         let feed = RedditFeed(dict: child_data)
-                        print(feed)
                         feeds.append(feed)
                     }
                     completion(feeds, nil)
@@ -68,6 +68,40 @@ class Downloader {
             }
         }
         task.resume()
+    }
+    
+    func imageFetch(with url: String, _ completion: @escaping (UIImage?, Any?) -> Void) {
+        
+        if let imgFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
+            completion(imgFromCache, nil)
+        } else {
+            guard let url = URL(string: url) else {
+                completion(nil, "Not a valid url")
+                return
+            }
+            let request = URLRequest(url: url)
+            let task = URLSession.shared.downloadTask(with: request, completionHandler: { (urlReq, response, error) in
+                if let err = error {
+                    completion(nil, err)
+                } else {
+                    if let req = urlReq {
+                        if let data = try? Data(contentsOf: req) {
+                            if let img = UIImage(data: data) {
+                                imageCache.setObject(img, forKey: url as AnyObject)
+                                completion(img, nil)
+                            } else {
+                                completion(nil, "No valid image")
+                            }
+                        } else {
+                            completion(nil, "No valid data")
+                        }
+                    } else {
+                        completion(nil, "No valid request")
+                    }
+                }
+            })
+            task.resume()
+        }
     }
     
 }
