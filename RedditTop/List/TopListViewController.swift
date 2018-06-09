@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class TopListViewController: UITableViewController {
 
@@ -72,6 +73,47 @@ extension TopListViewController: TopListCellDelegate {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
             UIApplication.shared.openURL(url)
+        }
+    }
+    
+    func saveImage(img: UIImage?) {
+        guard let image = img else {
+            return
+        }
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    self.actionSheetSaveImage(image)
+                } else {
+                    
+                }
+            })
+        } else if status == .authorized {
+            actionSheetSaveImage(image)
+        }
+    }
+    
+    func actionSheetSaveImage(_ img: UIImage) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Save Image", style: .default) { (_) in
+            UIImageWriteToSavedPhotosAlbum(img, self, #selector(self.action(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(action)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func action(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let _ = error {
+            let alert = UIAlertController(title: "Fail to Save", message: "please try again later", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
         }
     }
     

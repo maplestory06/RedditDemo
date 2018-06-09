@@ -10,6 +10,7 @@ import UIKit
 
 protocol TopListCellDelegate: class {
     func openURL(url: String)
+    func saveImage(img: UIImage?)
 }
 
 class TopListTableViewCell: UITableViewCell {
@@ -21,7 +22,7 @@ class TopListTableViewCell: UITableViewCell {
     @IBOutlet weak var lblNumComments: UILabel!
     
     weak var delegate: TopListCellDelegate?
-    private var imgURL = ""
+    private var fullSizeImageURL = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +41,8 @@ class TopListTableViewCell: UITableViewCell {
         imgThumbnail.backgroundColor = .white
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         imgThumbnail.addGestureRecognizer(tapGes)
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        imgThumbnail.addGestureRecognizer(longPress)
     }
 
     public func configureCell(feed: RedditFeed) {
@@ -48,7 +51,7 @@ class TopListTableViewCell: UITableViewCell {
         lblAuthor.text = "by " + feed.author
         lblNumComments.text = feed.num_comments > 0 ? "\(feed.num_comments) comments" : "0 comment"
         
-        imgURL = feed.thumbnail
+        fullSizeImageURL = feed.url
         fetchImage(feed.thumbnail)
     }
     
@@ -68,7 +71,11 @@ class TopListTableViewCell: UITableViewCell {
     }
     
     @objc private func handleTap() {
-        delegate?.openURL(url: self.imgURL)
+        delegate?.openURL(url: self.fullSizeImageURL)
+    }
+    
+    @objc private func handleLongPress() {
+        delegate?.saveImage(img: self.imgThumbnail.image)
     }
     
 }

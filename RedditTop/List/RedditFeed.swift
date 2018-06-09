@@ -15,6 +15,7 @@ struct RedditFeed {
     var thumbnail: String
     var created_utc: Double
     var num_comments: Int
+    var url: String
     
     init(dict: [String: Any]) {
         if let t = dict["title"] as? String {
@@ -41,6 +42,11 @@ struct RedditFeed {
             self.num_comments = num
         } else {
             self.num_comments = 0
+        }
+        if let url = dict["url"] as? String {
+            self.url = url
+        } else {
+            self.url = ""
         }
     }
     
