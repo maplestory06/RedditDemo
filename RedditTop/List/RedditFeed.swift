@@ -13,7 +13,7 @@ struct RedditFeed {
     var title: String
     var author: String
     var thumbnail: String
-    var created_utc: String
+    var created_utc: Double
     var num_comments: Int
     
     init(dict: [String: Any]) {
@@ -32,10 +32,10 @@ struct RedditFeed {
         } else {
             self.thumbnail = ""
         }
-        if let time = dict["created_utc"] as? String {
+        if let time = dict["created_utc"] as? Double {
             self.created_utc = time
         } else {
-            self.created_utc = ""
+            self.created_utc = 0
         }
         if let num = dict["num_comments"] as? Int {
             self.num_comments = num

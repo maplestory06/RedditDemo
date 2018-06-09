@@ -22,6 +22,7 @@ class TopListViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         tableView.tableFooterView = UIView(frame: .zero)
+        tableView.allowsSelection = false
     }
     
     private func fetchData() {
@@ -49,12 +50,28 @@ class TopListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopListTableViewCell", for: indexPath) as! TopListTableViewCell
         cell.configureCell(feed: redditFeeds[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == redditFeeds.count - 1 {
             fetchData()
+        }
+    }
+    
+}
+
+extension TopListViewController: TopListCellDelegate {
+    
+    func openURL(url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
         }
     }
     
