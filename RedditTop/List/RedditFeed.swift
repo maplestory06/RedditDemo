@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct RedditFeed {
+class RedditFeed: NSObject, NSCoding {
     
-    var title: String
-    var author: String
-    var thumbnail: String
-    var created_utc: Double
-    var num_comments: Int
-    var url: String
+    var title: String = ""
+    var author: String = ""
+    var thumbnail: String = ""
+    var created_utc: Double = 0
+    var num_comments: Int = 0
+    var url: String = ""
     
     init(dict: [String: Any]) {
         if let t = dict["title"] as? String {
@@ -50,4 +50,29 @@ struct RedditFeed {
         }
     }
     
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.title, forKey: "title")
+        aCoder.encode(self.author, forKey: "author")
+        aCoder.encode(self.thumbnail, forKey: "thumbnail")
+        aCoder.encode(self.created_utc, forKey: "created_utc")
+        aCoder.encode(self.num_comments, forKey: "num_comments")
+        aCoder.encode(self.url, forKey: "url")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        if let title = aDecoder.decodeObject(forKey: "title") as? String {
+            self.title = title
+        }
+        if let author = aDecoder.decodeObject(forKey: "author") as? String {
+            self.author = author
+        }
+        if let thumbnail = aDecoder.decodeObject(forKey: "thumbnail") as? String {
+            self.thumbnail = thumbnail
+        }
+        self.created_utc = aDecoder.decodeDouble(forKey: "created_utc")
+        self.num_comments = aDecoder.decodeInteger(forKey: "num_comments")
+        if let url = aDecoder.decodeObject(forKey: "url") as? String {
+            self.url = url
+        }
+    }
 }

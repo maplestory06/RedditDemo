@@ -16,7 +16,7 @@
 		50971B7420CC8AEC00E82184 /* RedditFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7320CC8AEC00E82184 /* RedditFeed.swift */; };
 		50971B7620CC8B7D00E82184 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7520CC8B7D00E82184 /* Downloader.swift */; };
 		50971B7820CC8C1200E82184 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7720CC8C1200E82184 /* Key.swift */; };
-		50971B7A20CC95DE00E82184 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7920CC95DE00E82184 /* IntExtension.swift */; };
+		50971B7A20CC95DE00E82184 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50971B7920CC95DE00E82184 /* DoubleExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		50971B7320CC8AEC00E82184 /* RedditFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditFeed.swift; sourceTree = "<group>"; };
 		50971B7520CC8B7D00E82184 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		50971B7720CC8C1200E82184 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
-		50971B7920CC95DE00E82184 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		50971B7920CC95DE00E82184 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 			children = (
 				50971B7520CC8B7D00E82184 /* Downloader.swift */,
 				50971B7720CC8C1200E82184 /* Key.swift */,
-				50971B7920CC95DE00E82184 /* IntExtension.swift */,
+				50971B7920CC95DE00E82184 /* DoubleExtension.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -168,7 +168,7 @@
 			files = (
 				50971B7620CC8B7D00E82184 /* Downloader.swift in Sources */,
 				50971B6220CC866800E82184 /* TopListViewController.swift in Sources */,
-				50971B7A20CC95DE00E82184 /* IntExtension.swift in Sources */,
+				50971B7A20CC95DE00E82184 /* DoubleExtension.swift in Sources */,
 				50971B7220CC879E00E82184 /* TopListTableViewCell.swift in Sources */,
 				50971B6020CC866800E82184 /* AppDelegate.swift in Sources */,
 				50971B7420CC8AEC00E82184 /* RedditFeed.swift in Sources */,

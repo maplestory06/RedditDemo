@@ -14,15 +14,21 @@ class Downloader {
     
     static let shared = Downloader()
     
-    func feedFetch(_ completion: @escaping ([RedditFeed]?, Any?) -> Void) {
+    func feedFetch(refresh: Bool = false, _ completion: @escaping ([RedditFeed]?, Any?) -> Void) {
         guard var components = URLComponents(string: "https://www.reddit.com/r/all/top.json") else {
             completion(nil, "No valid url components")
             return
         }
-        components.queryItems = [
-            URLQueryItem(name: "limit", value: "50"),
-            URLQueryItem(name: "after", value: Key.shared.pagination_after)
-        ]
+        if refresh {
+            components.queryItems = [
+                URLQueryItem(name: "limit", value: "50")
+            ]
+        } else {
+            components.queryItems = [
+                URLQueryItem(name: "limit", value: "50"),
+                URLQueryItem(name: "after", value: Key.shared.pagination_after)
+            ]
+        }
         guard let url = components.url else {
             completion(nil, "Not a valid url")
             return
@@ -49,6 +55,7 @@ class Downloader {
                     // pagination purpose
                     if let after = data["after"] as? String {
                         Key.shared.pagination_after = after
+                        UserDefaults.standard.set(after, forKey: "pagination_after")
                     }
                     guard let children = data["children"] as? [[String: Any]] else {
                         completion(nil, "No children")
@@ -71,7 +78,6 @@ class Downloader {
     }
     
     func imageFetch(with url: String, _ completion: @escaping (UIImage?, Any?) -> Void) {
-        
         if let imgFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
             completion(imgFromCache, nil)
         } else {

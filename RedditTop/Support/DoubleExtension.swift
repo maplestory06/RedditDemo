@@ -1,5 +1,5 @@
 //
-//  IntExtension.swift
+//  DoubleExtension.swift
 //  RedditTop
 //
 //  Created by Yue Shen on 6/9/18.
