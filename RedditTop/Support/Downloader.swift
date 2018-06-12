@@ -8,7 +8,7 @@
 
 import UIKit
 
-let imageCache = NSCache<AnyObject, AnyObject>()
+let imageCache = NSCache<NSString, UIImage>()
 
 class Downloader {
     
@@ -78,14 +78,14 @@ class Downloader {
     }
     
     func imageFetch(with url: String, _ completion: @escaping (UIImage?, Any?) -> Void) {
-        if let imgFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
+        if let imgFromCache = imageCache.object(forKey: url as NSString) {
             completion(imgFromCache, nil)
         } else {
-            guard let url = URL(string: url) else {
+            guard let realUrl = URL(string: url) else {
                 completion(nil, "Not a valid url")
                 return
             }
-            let request = URLRequest(url: url)
+            let request = URLRequest(url: realUrl)
             let task = URLSession.shared.downloadTask(with: request, completionHandler: { (urlReq, response, error) in
                 if let err = error {
                     completion(nil, err)
@@ -93,7 +93,7 @@ class Downloader {
                     if let req = urlReq {
                         if let data = try? Data(contentsOf: req) {
                             if let img = UIImage(data: data) {
-                                imageCache.setObject(img, forKey: url as AnyObject)
+                                imageCache.setObject(img, forKey: url as NSString)
                                 completion(img, nil)
                             } else {
                                 completion(nil, "No valid image")
